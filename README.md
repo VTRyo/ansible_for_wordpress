@@ -15,7 +15,7 @@
 ### 公開鍵の記述
 roles/common/tasks/main.ymlの最終行、""内に公開鍵を記述してください。
 
-## ansible　DryRun実行
+## ansible DryRun実行
 ```
 ansible-playbook -i hosts wordpress.yml --check
 ```
