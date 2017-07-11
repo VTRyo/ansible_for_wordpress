@@ -1,0 +1,9 @@
+[webserver]
+vtryo-web01
+
+[prd:children]
+webserver
+
+[vtryo.me:children]
+prd
+#dev

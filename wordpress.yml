@@ -1,0 +1,9 @@
+- hosts: webserver
+  become: True
+  roles:
+     - common
+     - h2o
+     - mysql
+     - php
+     - wp
+     - zabbix-agent

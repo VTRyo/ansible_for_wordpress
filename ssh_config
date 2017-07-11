@@ -1,0 +1,10 @@
+## Ansibleを実行するマシンの~/.ssh/conf.d/配下に置いておくと便利
+## ssh7.3からconfigファイルをincludeできる
+
+Host vtryo-web01
+  HostName <IP address>
+  IdentityFile ~/.ssh/conf.d/keys/id_rsa
+  User <UserName>
+  Port 22
+  IdentitiesOnly yes
+  ServerAliveInterval 15
