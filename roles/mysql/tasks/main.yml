@@ -1,0 +1,83 @@
+- name: install mysql repo
+  yum: name="{{ MYSQL_VERSION }}" state=present
+
+- name: install mysql
+  yum: name={{ item }} state=present enablerepo=mysql57-community,mysql-tools-community,mysql-connectors-community
+  with_items:
+    - mysql-server
+
+#===mysqlの操作をansibleでしたいときに有効にして、インストールを実施してください===
+#- name: install dependency module
+#  yum: name={{ item }} state=present
+#  with_items:
+#    - python-setuptools
+#    - python-devel
+#    - mysql-devel
+#    - gcc
+#
+#- name: upgrade pip
+#  shell: /usr/local/bin/pip install --upgrade pip
+#  register: result
+#  changed_when: '"Requirement already up-to-date" not in result.stdout'
+#
+#- name: install MySQL-python
+#  pip:
+#    name: MySQL-python
+#    executable: /usr/local/bin/pip
+#
+#================
+# 補足
+# # 書き換えもできる
+# - name: install MySQL-python
+#   shell: /usr/local/bin/pip install MySQL-python
+#   register: result
+#   changed_when: '"Requirement already satisfied" not in result.stdout'
+
+
+- name: service start mysql
+  service: name=mysqld state=started enabled=yes
+
+- name: get generate password for mysql
+  shell: "grep 'password is generated' /var/log/mysqld.log | awk -F'root@localhost: ' '{print $2}'"
+  register: generate_pass
+
+- name: replace .my.cnf
+  template:
+    src: "roles/mysql/template/.my.cnf"
+    dest: "/root/"
+
+- name: get password
+  lineinfile:
+    path: /root/.my.cnf
+    state: present
+    regexp: "{{ item.match }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { match: 'password=', line: 'password={{ generate_pass.stdout }}' }
+
+## mysql操作セクション例　（あくまで例です）
+# - name: set password for root
+#   mysql_user:
+#     name: "{{ mysql_login_user }}"
+#     host: localhost
+#     password: "{{ generate_pass.stdout }}"
+
+# - name: set mysql user
+#   mysql_user:
+#     name: "{{ db_user }}"
+#     password: "{{ db_pass }}"
+#     priv: '*.*:GRANT'
+#     host: localhost
+
+# - name: remove anonymous user
+#   mysql_user:
+#     name: ''
+#     host: localhost
+#     state: absent
+#
+# - name: remove test DB
+#   mysql_db:
+#     name: test
+#     state: absent
+#     host: localhost
+

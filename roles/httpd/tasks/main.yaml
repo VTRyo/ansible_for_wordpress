@@ -1,0 +1,26 @@
+- name: install httpd
+　yum: name={{ item }} state=present
+  with_items:
+    - httpd
+    - mod_ssl
+
+- name: service start httpd
+  service: name=httpd state=started enabled=yes
+
+#httpdファイルのtemplateを作成した時にお使いください
+# - name: template deploy httpd.conf
+#   template:
+#     src: "roles/httpd/template/httpd.conf"
+#     dest: "/etc/httpd/conf/"
+#     owner: "{{ httpd_user }}"
+#     group: "{{ httpd_ user }}"
+#     backup: yes
+#
+# - name: template deploy ssl.conf
+#   template:
+#     src: "roles/httpd/template/ssl.conf"
+#     dest: "/etc/httpd/conf.d/"
+#     owner: "{{ httpd_user }}"
+#     group: "{{ httpd_user }}"
+#     backup: yes
+#   notify: restart httpd

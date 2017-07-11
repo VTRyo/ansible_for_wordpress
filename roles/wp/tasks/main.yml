@@ -1,0 +1,10 @@
+ - name: copy wordpress.tar
+   copy:
+     src: "roles/wp/files/wordpress-3.5.1-ja.tar.gz"
+     dest: "/var/tmp/"
+
+ - name: tar wordpress
+   unarchive:
+     src: "/var/tmp/wordpress-3.5.1-ja.tar.gz"
+     dest: "/var/www/html/"
+     remote_src: True

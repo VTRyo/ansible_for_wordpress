@@ -1,0 +1,31 @@
+- name: copy package h2o
+  copy:
+    src: "roles/h2o/files/"
+    dest: "/var/tmp/"
+
+- name: install h2o
+  yum: name=/var/tmp/h2o-2.2.2-1.el6.x86_64.rpm state=present
+
+- name: service start h2o
+  service: name=h2o enabled=yes state=started
+
+- name: mkdir sites-enabled
+  file:
+    path: /etc/h2o/sites-enabled
+    state: directory
+
+- name: template deploy h2o conf
+  template:
+    src: roles/h2o/template/h2o.conf
+    dest: /etc/h2o/
+
+- name: template deploy site.conf
+  template:
+    src: roles/h2o/template/sites-enabled/site.conf
+    dest: /etc/h2o/sites-enabled/
+
+- name: template deploy mruby
+  template:
+    src: "roles/h2o/template/mruby"
+    dest: "/etc/h2o/sites-enabled/"
+  notify: restart h2o

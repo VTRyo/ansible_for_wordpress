@@ -1,0 +1,33 @@
+- name: get zabbix-agent rpm
+  get_url:
+    url: "{{ ZABBIX_VERSION }}"
+    dest: "/var/tmp/{{ ZABBIX_RPM }}"
+
+- name: install zabbix-agent rpm
+  yum: name="/var/tmp/{{ ZABBIX_RPM }}" state=present
+
+- name: install zabbix-agent rpm key
+  rpm_key:
+    state: present
+    key: /etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
+
+- name: install zabbix-agent
+  yum: name={{ item }} state=present
+  with_items:
+    - zabbix-agent
+
+- name: start zabbix-agent
+  service: name=zabbix-agent enabled=yes state=started
+
+- name: zabbix-agent
+  template:
+    src: "roles/zabbix-agent/templates/{{ item.src }}"
+    dest: "/etc/zabbix/{{ item.dest }}"
+    backup: yes
+    owner: root
+    group: zabbix
+    mode: 0640
+  with_items:
+    - { src: zabbix_agent.conf, dest: . }
+    - { src: zabbix_agentd.conf, dest: . }
+  notify: restart zabbix-agent

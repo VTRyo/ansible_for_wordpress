@@ -1,0 +1,65 @@
+- name: yum install bacepackage
+  yum: name={{ item }} state=present
+  with_items:
+    - vim
+    - zsh
+    - git
+    - tree
+    - htop
+    - mlocate
+    - telnet
+    - yum-plugin-changelog
+
+- name: change hostname
+  hostname: name={{ server_hostname }}
+
+- name: change timezone to Asia/Tokyo
+  timezone:
+    name: Asia/Tokyo
+
+- name: /swapfile create swap
+  blockinfile:
+    dest: /swapfile
+    create: yes
+    block: |
+      dd if=/dev/zero of=/swapfile bs=1M count=1024;
+      chmod 600 /swapfile;
+      mkswap /swapfile;
+      swapon /swapfile;
+
+- name: change swappiness
+  sysctl:
+    name: vm.swappiness
+    value: 0
+    state: present
+
+- name: create user
+  user:
+    name: "{{ item.name }}"
+    createhome: yes
+    password: "{{ item.password | password_hash('sha512') }}"
+    shell: "{{ item.shell }}"
+    groups: nobody
+    state: "{{ item.state }}"
+    remove: "{{ item.remove }}"
+  with_items:
+  - { shell: '/bin/zsh',state: 'present', remove: 'no', name: 'vtryo', password: 'xxxxx' }
+
+- name: add group
+  group:
+    name: sftp
+    state: present
+
+- name: add sudoers
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: "{{ item.match }}"
+    line: "{{ item.line }}"
+  with_items:
+  - { match: 'vtryo', line: 'vtryo ALL=(ALL) NOPASSWD: ALL' }
+
+- name: authorized_key for user vtryo
+  authorized_key:
+    user: vtryo
+    key: ""
