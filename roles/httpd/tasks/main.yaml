@@ -13,7 +13,7 @@
 #     src: "roles/httpd/template/httpd.conf"
 #     dest: "/etc/httpd/conf/"
 #     owner: "{{ httpd_user }}"
-#     group: "{{ httpd_ user }}"
+#     group: "{{ httpd_user }}"
 #     backup: yes
 #
 # - name: template deploy ssl.conf
