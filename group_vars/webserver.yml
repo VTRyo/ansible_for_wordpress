@@ -1,6 +1,6 @@
 ##=====COMMON=====##
-server_hostname: "vtryo-web02"
-Domain_name: "vtryo.me"
+server_hostname: ""
+Domain_name: ""
 
 ##=====mysql=====##
 mysql_login_user: "root"

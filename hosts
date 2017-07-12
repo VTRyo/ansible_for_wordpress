@@ -1,5 +1,5 @@
 [webserver]
-13.113.7.194 #vtryo-web02
+vtryo-web02
 
 [prd:children]
 webserver
