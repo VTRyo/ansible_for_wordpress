@@ -43,7 +43,7 @@
     state: "{{ item.state }}"
     remove: "{{ item.remove }}"
   with_items:
-  - { shell: '/bin/zsh',state: 'present', remove: 'no', name: 'vtryo', password: 'xxxxx' }
+  - { shell: '/bin/zsh',state: 'present', remove: 'no', name: 'vtryo', password: 'passwd' }
 
 - name: add group
   group:
@@ -62,4 +62,4 @@
 - name: authorized_key for user vtryo
   authorized_key:
     user: vtryo
-    key: ""
+    key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAGECc1YPnpFGMyChthhyRdnXLhmcGtbtcq7SYb1Y77pLoAQLIvVuYYPuW+4v6OZT4typIAo9u0AltlUBMjKyxrChfmb6fu+kT6I5YdemfiYOKOyJpdP7LOYznmwV+Jl1b2ZczmrYDUKB295pCHjG6Fty48bfxSCFMW9FQ+ehElZX0mUNlQORLHwYpRnHKLiPSAWuxitQUjGDwM9+oN93OPVjU7QTPl5TXkNNAPdiLn7IXhHS+xpHzMsX3WwFvkZqXYbDMvtlr0Yen/MDz83I3t28JxQyd0mScM/TacitKQaIggftYFV586MHJHd43wYukdG2cPrt2Eb9MLOla62oL inaba@DESKTOP-RMJRNPK"

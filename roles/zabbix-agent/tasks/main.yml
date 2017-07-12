@@ -21,7 +21,7 @@
 
 - name: zabbix-agent
   template:
-    src: "roles/zabbix-agent/templates/{{ item.src }}"
+    src: "roles/zabbix-agent/template/{{ item.src }}"
     dest: "/etc/zabbix/{{ item.dest }}"
     backup: yes
     owner: root

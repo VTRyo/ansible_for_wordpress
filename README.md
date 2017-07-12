@@ -6,23 +6,35 @@
 * server_hostname
 * Domain_name
 
-### mysqlはインストール以降の設定は手動です
+### hostsに対象サーバを再定義する
 
+### mysqlはインストール以降の設定は手動です
+mysql_secure_installationは手動実行してください。<br>
+※mysql用ログインパスワードは/root/.my.cnfに出力されるよう、Ansibleで処理をしています。
 ### wordpressはDocumentRootへの展開以降は手動です
 
 ### zabbix-agentはzabbix-serverがいないと稼働しません
 
+### ユーザパスワードの記述
+roles/common/tasks/main.ymlの46行目にユーザパスワード「xxxx」を任意のパスワードに変更してください。
+
 ### 公開鍵の記述
 roles/common/tasks/main.ymlの最終行、""内に公開鍵を記述してください。
 
-## ansible DryRun実行
+## 実行コマンド
+### ansible DryRun実行
 ```
 ansible-playbook -i hosts wordpress.yml --check
 ```
 
-## ansible 本番実行
+### ansible 本番実行
 ```
 ansible-playbook -i hosts wordpress.yml
+```
+
+### ansible 鍵とログインユーザを指定して実行
+```
+ansible-playbook --private-key=<key> -i hosts -u <user> wordpress.yml --check
 ```
 
 ## ミドルウェア

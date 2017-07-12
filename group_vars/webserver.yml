@@ -1,9 +1,13 @@
 ##=====COMMON=====##
-server_hostname: vtryo-web01
-Domain_name: vtryo.me
+server_hostname: "vtryo-web02"
+Domain_name: "vtryo.me"
 
+##=====mysql=====##
+mysql_login_user: "root"
+mysql_generate_pass: "{{ generate_pass.stdout }}"
 ##=====h2o=====##
-h2o_conf_user: nobody
+h2o_conf_user: "nobody"
+##=====zabbix-agent=====##
 
 ##=====REPOSITORIES=====##
 #zabbix
