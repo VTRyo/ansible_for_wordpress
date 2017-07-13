@@ -1,0 +1,8 @@
+- name: set crontab for backwpup
+  lineinfile:
+    path: /etc/crontab
+    state: present
+    regexp: "{{ item.match }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { match: '{{ match_word }}', line: '{{ cron_command }}' }
