@@ -32,14 +32,18 @@
 ### hostsに対象サーバを再定義する
 IP、ドメイン名など、環境に合わせて適切にhostsを定義してください。
 
-### h2oの/files/bintray-tatsushid-h2o-rpm.repoはamazon Linux用です。
-baseurlがcentosとamazon Linuxとで異なりますので、環境に合わせて変更してください。
-
 ### ユーザパスワードの記述
 roles/common/tasks/main.ymlの46行目にユーザパスワード「xxxxx」を任意のパスワードに変更してください。
 
 ### 公開鍵の記述
 roles/common/tasks/main.ymlの最終行、""内に公開鍵を記述してください。
+
+### h2oの/files/bintray-tatsushid-h2o-rpm.repoはamazon Linux用です
+baseurlがcentosとamazon Linuxとで異なりますので、環境に合わせて変更してください。
+
+### PHP7のmain.ymlはamazon Linux用です
+main.yml内にて--disablerepo=amzn-mainを記述しています。EC2でremiを使用するには、amzon Linux固有のリポジトリを明示的に”使用しない”宣言をします。<br>
+そのため、対象のサーバがamazon Linuxではない場合は、--disablerepo=amzn-mainの記述を削除してください。
 
 ### mysqlはインストール以降の設定は手動です
 mysql_secure_installationは手動実行してください。<br>
@@ -70,19 +74,12 @@ ansible-playbook --private-key=<key> -i hosts -u <user> wordpress.yml --check
 ### .sshファイル
 対象のサーバのIPや鍵の設定を予めしておくことで、Ansibleをより快適に使用できます。
 
-### init.dのスクリプトはh2oの起動スクリプトです。
+### init.dのスクリプトはh2oの起動スクリプト
 デフォルトの起動スクリプトを使用するとrestartしない不具合が起こるため、こちらを使用のオススメします。
 
 ### crontabに記述するコマンドの意味
 wordpressを構築後、コンテンツバックアップは「backwpup」プラグインを使用する想定でこのcron設定をしています。<br>
 必要がない場合はwordpress.ymlからcronをコメントアウトしてください。
-
-### h2oの/files/bintray-tatsushid-h2o-rpm.repoはamazon Linux用です。
-baseurlがcentosとamazon Linuxとで異なりますので、環境に合わせて変更してください。
-
-### PHP7のmain.ymlはamazon Linux用です。
-main.yml内にて--disablerepo=amzn-mainを記述しています。EC2でremiを使用するには、amzon Linux固有のリポジトリを明示的に”使用しない”宣言をします。<br>
-そのため、対象のサーバがamazon Linuxではない場合は、--disablerepo=amzn-mainの記述を削除してください。
 
 ### wordpressのインストールを自動化しない理由
 ansibleで最も重要視すべきは冪等性です。同じコマンドを何度打っても、同じ結果に収束する必要があります。wordpressはコンテンツの展開をするまでがサーバ側でのインストール準備になります。ansibleを打つ度にwordpressが展開されてしまうと、毎回初期化される危険に晒されます。そのため、ansibleの管理化から除外しました。
