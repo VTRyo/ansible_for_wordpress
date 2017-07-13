@@ -58,6 +58,11 @@ ansible-playbook --private-key=<key> -i hosts -u <user> wordpress.yml --check
 ### init.dのスクリプトはh2oの起動スクリプトです。
 デフォルトの起動スクリプトを使用するとrestartしない不具合が起こるため、こちらを使用のオススメします。
 
+### crontabに記述するコマンドの意味
+wordpressを構築後、コンテンツバックアップは「backwpup」プラグインを使用する想定でこのcron設定をしています。<br>
+必要がない場合はwordpress.ymlからcronをコメントアウトしてください。<br>
+また、group_vars/webserver.ymlにてcronに打たせるコマンドを再定義することも可能です。
+
 ### h2oの/files/bintray-tatsushid-h2o-rpm.repoはamazon Linux用です。
 baseurlがcentosとamazon Linuxとで異なりますので、環境に合わせて変更してください。
 

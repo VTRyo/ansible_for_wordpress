@@ -11,6 +11,10 @@ h2o_conf_user: "nobody"
 allow_ip1: "0.0.0.0"
 allow_ip2: "0.0.0.0"
 
+##=====cron=====##
+match_word: "wp-cron.php"
+cron_command: "* * * * * nobody /usr/bin/php -q /var/www/html/wordpress/wp-cron.php >/dev/null 2>&1"
+
 ##=====zabbix-agent=====##
 
 ##=====REPOSITORIES=====##
