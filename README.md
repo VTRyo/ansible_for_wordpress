@@ -4,11 +4,14 @@
 
 ## 自動化箇所
 * よくつかうコマンドのインストール
+* hostnameの変更
+* タイムゾーンの変更
 * ユーザ作成
+* SFTPグループの作成
 * visudo
 * authorized_key登録
-* WEB：h2o
-* APP: php7
+* WEB：h2oのセットアップ
+* APP: php7（php-fpm）
 * DB: mysql5.7
 * zabbix-agent
 * cronのセット
