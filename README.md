@@ -1,5 +1,26 @@
 # Ansibleによるインフラ自動化入門
 
+このAnsibleコードをforkして実行すると、wordpressサーバのベース部分が自動構築されます。
+
+## 自動化箇所
+* よくつかうコマンドのインストール
+* ユーザ作成
+* visudo
+* authorized_key登録
+* WEB：h2o
+* APP: php7
+* DB: mysql5.7
+* zabbix-agent
+* cronのセット
+
+実行後、対象のサーバのミドルウェアは起動状態になっています。<br>
+自身のIPでアクセスをするとテストページが表示されます。
+
+## 手動で実行する箇所
+* wordpressのインストールとセットアップ
+* mysqlの初期セットアップ
+* サーバ証明書の取得
+
 ## 使い方
 ### group_varsに変数定義する
 各々で変数を再定義してください。
@@ -44,12 +65,6 @@ ansible-playbook -i hosts wordpress.yml
 ```
 ansible-playbook --private-key=<key> -i hosts -u <user> wordpress.yml --check
 ```
-
-## ミドルウェア
-* h2o
-* mysql5.7
-* php7
-* zabbix-agent
 
 ## 補足
 ### .sshファイル
