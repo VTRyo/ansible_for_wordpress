@@ -4,5 +4,6 @@
     user: "{{ item.user }}"
     job: "{{ item.job }}"
     hour: "{{ item.hour }}"
+    cron_file: "/etc/crontab"
   with_items:
     - { name: 'backwpup', hour: '*', user: 'nobody', job: '/usr/bin/php -q /var/www/html/wp/wp-cron.php >/dev/null 2>&1' }
