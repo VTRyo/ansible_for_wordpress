@@ -1,8 +1,8 @@
-- name: set crontab for backwpup
-  lineinfile:
-    path: /etc/crontab
-    state: present
-    regexp: "{{ item.match }}"
-    line: "{{ item.line }}"
+- name: set crontab
+  cron:
+    name: "{{ item.name }}"
+    user: "{{ item.user }}"
+    job: "{{ item.job }}"
+    hour: "{{ item.hour }}"
   with_items:
-    - { match: '{{ match_word }}', line: '{{ cron_command }}' }
+    - { name: 'backwpup', hour: '*', user: 'nobody', job: '/usr/bin/php -q /var/www/html/wp/wp-cron.php >/dev/null 2>&1' }
