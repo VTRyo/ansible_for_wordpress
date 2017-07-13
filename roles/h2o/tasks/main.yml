@@ -1,10 +1,10 @@
-- name: copy package h2o
+- name: copy yum.repo h2o
   copy:
-    src: "roles/h2o/files/"
-    dest: "/var/tmp/"
+    src: "roles/h2o/files/bintray-tatsushid-h2o-rpm.repo"
+    dest: "/etc/yum.repos.d/"
 
 - name: install h2o
-  yum: name=/var/tmp/h2o-2.2.2-1.el6.x86_64.rpm state=present
+  yum: name=h2o state=present
 
 - name: service start h2o
   service: name=h2o enabled=yes state=started

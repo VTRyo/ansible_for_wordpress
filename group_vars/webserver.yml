@@ -1,12 +1,16 @@
 ##=====COMMON=====##
-server_hostname: ""
-Domain_name: ""
+server_hostname: "example-web01"
+Domain_name: "example.com"
 
 ##=====mysql=====##
 mysql_login_user: "root"
 mysql_generate_pass: "{{ generate_pass.stdout }}"
+
 ##=====h2o=====##
 h2o_conf_user: "nobody"
+allow_ip1: "0.0.0.0"
+allow_ip2: "0.0.0.0"
+
 ##=====zabbix-agent=====##
 
 ##=====REPOSITORIES=====##

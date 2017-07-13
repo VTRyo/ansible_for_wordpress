@@ -17,22 +17,6 @@
   timezone:
     name: Asia/Tokyo
 
-- name: /swapfile create swap
-  blockinfile:
-    dest: /swapfile
-    create: yes
-    block: |
-      dd if=/dev/zero of=/swapfile bs=1M count=1024;
-      chmod 600 /swapfile;
-      mkswap /swapfile;
-      swapon /swapfile;
-
-- name: change swappiness
-  sysctl:
-    name: vm.swappiness
-    value: 0
-    state: present
-
 - name: create user
   user:
     name: "{{ item.name }}"

@@ -1,5 +1,5 @@
 [webserver]
-vtryo-web02
+example.com
 
 [prd:children]
 webserver
