@@ -5,33 +5,9 @@
   yum: name={{ item }} state=present enablerepo=mysql57-community,mysql-tools-community,mysql-connectors-community
   with_items:
     - mysql-server
-
-#===mysqlの操作をansibleでしたいときに有効にして、インストールを実施してください===
-#- name: install dependency module
-#  yum: name={{ item }} state=present
-#  with_items:
-#    - python-setuptools
-#    - python-devel
-#    - mysql-devel
-#    - gcc
-#
-#- name: upgrade pip
-#  shell: /usr/local/bin/pip install --upgrade pip
-#  register: result
-#  changed_when: '"Requirement already up-to-date" not in result.stdout'
-#
-#- name: install MySQL-python
-#  pip:
-#    name: MySQL-python
-#    executable: /usr/local/bin/pip
-#
-#================
-# 補足
-# # 書き換えもできる
-# - name: install MySQL-python
-#   shell: /usr/local/bin/pip install MySQL-python
-#   register: result
-#   changed_when: '"Requirement already satisfied" not in result.stdout'
+    - mysql
+    - mysql-devel
+    - MyQSL-python
 
 
 - name: service start mysql

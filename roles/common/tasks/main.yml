@@ -9,6 +9,7 @@
     - mlocate
     - telnet
     - yum-plugin-changelog
+    - gcc
 
 - name: change hostname
   hostname: name={{ server_hostname }}
