@@ -9,9 +9,9 @@
 - name: service start h2o
   service: name=h2o enabled=yes state=started
 
-- name: mkdir sites-enabled
+- name: mkdir conf.d
   file:
-    path: /etc/h2o/sites-enabled
+    path: /etc/h2o/conf.d
     state: directory
 
 - name: mkdir mruby
@@ -26,8 +26,8 @@
 
 - name: template deploy site.conf
   template:
-    src: roles/h2o/template/sites-enabled/site.conf
-    dest: /etc/h2o/sites-enabled/
+    src: roles/h2o/template/conf.d/site.conf
+    dest: /etc/h2o/conf.d/
 
 - name: template deploy mruby
   copy:
