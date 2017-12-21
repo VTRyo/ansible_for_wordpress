@@ -1,0 +1,26 @@
+- name: create screen target
+  become: no
+  local_action:
+    module: zabbix_screen
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_user }}"
+    login_password: "{{ zabbix_login_pass }}"
+    screens:
+      - screen_name: "{{ target_screen_name }}"
+        host_group: "{{ target_host-group_name }}"
+        state: present
+        graph_names:
+          - CPU jumps
+          - CPU load
+          - CPU utilization
+          - Load Average_1,5,15
+          - '[OS] Disk space usage /'
+          - Disk usage
+          - Disk IO
+          - Memory usage
+          - Swap usage
+          - Network traffic
+          - mysql process
+        graph_width: 400
+        graph_heghit: 100
+
