@@ -1,0 +1,32 @@
+- name: create host target
+  become: no
+  local_action:
+    module: zabbix_host
+    server_url: "{{zabbix_server_url }}"
+    login_user: "{{ zabbix_login_user }}"
+    login_password: "{{ zabbix_login_pass }}"
+    host_name: "{{ zabbix_host_name }}"
+    visible_name: "{{ zabbix_visible_name }}"
+    host_groups:
+      - "{{ zabbix_host_group }}"
+    link_templates:
+      - 000_Template OS Linux
+      - 000_Template SSL Check
+      - Template App Zabbix Server
+    status: enabled
+    state: present
+    inventory_mode: automatic
+    interfaces:
+      - type: 1
+        main: 1
+        useip: 1
+        ip: 10.0.0.1
+        dns: ""
+        port: 10050
+      - type: 4
+        main: 1
+        useip: 1
+        ip: 10.0.0.1
+        dns: ""
+        port: 12345
+
