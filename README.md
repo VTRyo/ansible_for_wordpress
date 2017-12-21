@@ -94,3 +94,8 @@ zabbix監視を行う場合は、zabbix-serverの構築が必要です。
 ### zabbix-agentについて
 tasks/main.yml序盤のセクションにあるrpmインストールやrpm keyのインストールは、DryRunではスキップされるため、実際に本番適用させる必要があります。<br>
 本コードはすでに何度も本番環境で実行された実績があります。
+
+### zabbix-server-*について
+zabbix-server上で設定するホスト、ホストグループ、スクリーンの作成を自動化します。
+
+
