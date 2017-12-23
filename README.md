@@ -98,4 +98,5 @@ tasks/main.yml序盤のセクションにあるrpmインストールやrpm key�
 ### zabbix-server-*について
 zabbix-server上で設定するホスト、ホストグループ、スクリーンの作成を自動化します。
 
+screenはホストグループに含まれるホストをすべてスクリーン化します。
 
