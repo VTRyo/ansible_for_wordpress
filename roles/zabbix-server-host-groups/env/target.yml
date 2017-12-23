@@ -1,0 +1,10 @@
+- name: create host_groups target-host
+  become: no
+  local_action:
+    module: zabbix_group
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_user }}"
+    login_password: "{{ zabbix_login_pass }}"
+    state: present
+    host_groups:
+      - target-host
