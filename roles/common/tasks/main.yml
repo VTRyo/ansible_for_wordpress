@@ -46,5 +46,7 @@
 
 - name: authorized_key for user vtryo
   authorized_key:
-    user: vtryo
-    key: ""
+    user: "{{ item.user }}"
+    key: "{{ item.key }}"
+  with_items:
+    - { user:'vtryo', key:'{{ lookup('file', 'roles/common/files/vtryo.pub') }}" }
